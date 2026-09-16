@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행 코스 추천 사이트</title>
+    <link rel="icon" href="/images/icon_favicon_512.png" type="image/png">
+    <link rel="stylesheet" href="/css/substyle.css">
+    <script src="/js/subscript.js" defer></script>
+  
+</head>
+<body class="hero">
+  <section class="menuBar">
+    <div class="menuList">
+      <li>
+      <button type="button" class="menu_Icon"><img src="/images/menu_Icon.png"></button>
+      <ul class="submenu">
+        <li><a href="/pages/subpage.html">서브메뉴1</a></li>
+        <li><a href="/exam.html">서브메뉴2</a></li>
+      </ul>
+      </li>
+    </div>
+  </section>
+
+  <div class="container">
+    <h1>🧭 맞춤 여행 코스 추천</h1>
+    <p class="subtitle">원하시는 조건들을 선택하시면 최적의 코스를 추천해 드립니다.</p>
+
+    <!-- 1단계: 지역(도) 선택 -->
+    <div class="section">
+      <div class="section-title">
+        <span class="badge"></span> 여행하실 '도'를 선택해 주세요
+      </div>
+      <div class="options-grid" id="region-group">
+        <button class="btn-option" data-value="경기도">경기도</button>
+        <button class="btn-option" data-value="강원도">강원도</button>
+        <button class="btn-option" data-value="충청도">충청도</button>
+        <button class="btn-option" data-value="전라도">전라도</button>
+        <button class="btn-option" data-value="경상도">경상도</button>
+        <button class="btn-option" data-value="제주특별자치도">제주도</button>
+      </div>
+    </div>
+
+    <!-- 2단계: 동행자 선택 (초기 숨김) -->
+    <div class="section hidden" id="step-companion">
+      <div class="section-title">
+        <span class="badge">2</span> 동행자를 선택해 주세요
+      </div>
+      <div class="options-flex" id="companion-group">
+        <button class="btn-option" data-value="혼자">👤 혼자</button>
+        <button class="btn-option" data-value="커플">👩‍❤️‍👨 커플</button>
+        <button class="btn-option" data-value="가족"> 👨‍👩‍👧‍👦가족</button>
+      </div>
+    </div>
+
+    <!-- 3단계: 계절 선택 (초기 숨김) -->
+    <div class="section hidden" id="step-season">
+      <div class="section-title">
+        <span class="badge">3</span> 계절을 선택해 주세요! 
+      </div>
+      <div class="options-flex" id="season-group">
+        <button class="btn-option" data-value="봄/가을">🌸 3월4월5월</button>
+        <button class="btn-option" data-value="여름">🌊 6월7월8월</button>
+        <button class="btn-option" data-value="가을">🍂 9월10월11월</button>
+        <button class="btn-option" data-value="겨울">❄️ 12월1월2월</button>
+      </div>
+    </div>
+
+    <!-- 4단계: 추천 결과 출력 영역 -->
+    <div class="result-box hidden" id="result-box">
+      <h3 id="result-title">추천 여행 코스</h3>
+      <ul class="course-list" id="course-list">
+        <!-- JS로 dynamic 생성란 비워둘 것 -->
+      </ul>
+    </div>
+  </div>
+
+  <section class="container" id="test">
+    <div class="block">
+      <h1 class="text">오늘의 추천</h1>
+    </div>
+    <div class="contentTest">
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+      <p>.</p>
+    </div>
+  </section>
+  
+</body>
+</html>
+
+<!-- 단계별 선택 완료 후 상세보기를 눌러 경로 란에 카드가 펼쳐지면서 나오도록 수정할 예정 -->
