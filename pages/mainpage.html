@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>한국의 여행 코스</title>
+
+    <link rel="stylesheet" href="../css/mainstyle.css">
+</head>
+
+<body>
+  <section class="menuBar">
+    <div class="menuList">
+      <li>
+        <button type="button" class="menu_Icon">
+          <img src="/images/menu_Icon.png" alt="메뉴">
+        </button>
+
+        <ul class="submenu">
+          <li><a href="/pages/mainpage.html">서브메뉴1</a></li>
+          <li><a href="*">서브메뉴2</a></li>
+        </ul>
+      </li>
+    </div>
+  </section>
+
+    <main class="container">
+
+        <div class="page-header">
+            <h1 class="page-title">한국의 여행 코스</h1>
+            <a class="more-button" href="./subPage.html">더보기 <span aria-hidden="true">&#8594;</span></a>
+        </div>
+
+
+        <section class="map-section" aria-labelledby="map-title">
+
+            <h2 id="map-title">대한민국 여행 지도</h2>
+
+            <div class="map-frame">
+
+                <svg
+                    class="korea-map"
+                    viewBox="0 0 640 620"
+                    role="img"
+                    aria-label="대한민국 여행 지역 지도"
+                >
+
+                    <!-- 경기도 -->
+                    <path
+                        id="gyeonggi"
+                        class="map-region gyeonggi"
+                        d="
+                            M205 78
+                            L286 52
+                            L346 86
+                            L334 167
+                            L276 188
+                            L213 164
+                            L177 119
+                            Z
+                        "
+                    />
+
+                    <!-- 강원도 -->
+                    <path
+                        id="gangwon"
+                        class="map-region gangwon"
+                        d="
+                            M286 52
+                            L405 42
+                            L493 97
+                            L468 206
+                            L390 238
+                            L334 167
+                            L346 86
+                            Z
+                        "
+                    />
+
+                    <!-- 충청도 -->
+                    <path
+                        id="chungcheong"
+                        class="map-region chungcheong"
+                        d="
+                            M177 119
+                            L213 164
+                            L276 188
+                            L334 167
+                            L390 238
+                            L345 323
+                            L251 309
+                            L178 255
+                            L145 184
+                            Z
+                        "
+                    />
+
+                    <!-- 전라도 -->
+                    <path
+                        id="jeolla"
+                        class="map-region jeolla"
+                        d="
+                            M145 184
+                            L178 255
+                            L251 309
+                            L345 323
+                            L310 430
+                            L246 493
+                            L143 451
+                            L92 367
+                            L101 265
+                            Z
+                        "
+                    />
+
+                    <!-- 경상도 -->
+                    <path
+                        id="gyeongsang"
+                        class="map-region gyeongsang"
+                        d="
+                            M390 238
+                            L468 206
+                            L535 267
+                            L530 378
+                            L465 450
+                            L386 425
+                            L310 430
+                            L345 323
+                            Z
+                        "
+                    />
+
+                    <!-- 제주도 -->
+                    <path
+                        id="jeju"
+                        class="map-region jeju"
+                        d="
+                            M184 548
+                            C220 525 280 525 317 548
+                            C283 578 219 579 184 548
+                            Z
+                        "
+                    />
+
+
+                    <!-- 지역 이름 -->
+
+                    <text
+                        class="map-label"
+                        x="250"
+                        y="123"
+                        pointer-events="none"
+                    >
+                        경기도
+                    </text>
+
+                    <text
+                        class="map-label"
+                        x="395"
+                        y="130"
+                        pointer-events="none"
+                    >
+                        강원도
+                    </text>
+
+                    <text
+                        class="map-label"
+                        x="255"
+                        y="245"
+                        pointer-events="none"
+                    >
+                        충청도
+                    </text>
+
+                    <text
+                        class="map-label"
+                        x="190"
+                        y="370"
+                        pointer-events="none"
+                    >
+                        전라도
+                    </text>
+
+                    <text
+                        class="map-label"
+                        x="420"
+                        y="330"
+                        pointer-events="none"
+                    >
+                        경상도
+                    </text>
+
+                    <text
+                        class="map-label"
+                        x="237"
+                        y="554"
+                        pointer-events="none"
+                    >
+                        제주도
+                    </text>
+
+                </svg>
+
+            </div>
+
+            <aside class="recommendation-card" id="recommendation-card" aria-live="polite" aria-hidden="true">
+                <img id="recommendation-image" class="recommendation-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="">
+                <p class="recommendation-label">대표 추천 여행지</p>
+                <h3 id="recommendation-title"></h3>
+                <p id="recommendation-description"></p>
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="../js/mainjs.js"></script>
+
+</body>
+
+</html>

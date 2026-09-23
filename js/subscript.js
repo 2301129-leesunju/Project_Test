@@ -174,9 +174,104 @@ function renderResult() {
 }
 // 메뉴
 
-const menuIcon = document.querySelector('.menu_Icon');
-const submenu = document.querySelector('.submenu');
+const menuIcon = document.querySelector(".menu_Icon");
+const menuItem = document.querySelector(".menuList > li");
+const submenu = document.querySelector(".submenu");
 
-menuIcon.addEventListener('click', function () {
-    submenu.classList.toggle('active');
+
+/* =========================
+   메뉴 열기 / 닫기
+========================= */
+
+menuIcon.addEventListener("click", function () {
+
+    menuItem.classList.toggle("open");
+
+    if (menuItem.classList.contains("open")) {
+        adjustSubmenu();
+    }
+});
+
+
+/* =========================
+   서브메뉴 위치 계산
+========================= */
+
+function adjustSubmenu() {
+
+    const iconRect = menuIcon.getBoundingClientRect();
+
+    /*
+     * 일단 메뉴를 화면 안쪽에 표시
+     */
+    submenu.style.left = "10px";
+
+    submenu.style.top =
+        `${iconRect.bottom + 10}px`;
+
+    /*
+     * 실제 서브메뉴 크기 확인
+     */
+    const submenuRect =
+        submenu.getBoundingClientRect();
+
+    const margin = 10;
+
+    let left = iconRect.left;
+
+    /*
+     * 기본적으로 아이콘의 왼쪽에 맞춤
+     */
+    left = iconRect.left;
+
+
+    /*
+     * 왼쪽으로 나가는 경우
+     */
+    if (left < margin) {
+        left = margin;
+    }
+
+
+    /*
+     * 오른쪽으로 나가는 경우
+     */
+    if (
+        left + submenuRect.width
+        > window.innerWidth - margin
+    ) {
+
+        left =
+            window.innerWidth
+            - submenuRect.width
+            - margin;
+    }
+
+
+    /*
+     * 그래도 왼쪽으로 나가는 경우
+     * 화면 자체가 매우 작은 상황
+     */
+    if (left < margin) {
+        left = margin;
+    }
+
+
+    /*
+     * 최종 위치
+     */
+    submenu.style.left = `${left}px`;
+}
+
+
+/* =========================
+   창 크기 변경
+========================= */
+
+window.addEventListener("resize", function () {
+
+    if (menuItem.classList.contains("open")) {
+        adjustSubmenu();
+    }
+
 });

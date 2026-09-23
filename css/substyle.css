@@ -1,3 +1,4 @@
+    /* var 값 설정 - 대충 color 값 미리 설정해놓는것 */
    :root {
       --primary-color: #3b82f6;
       --primary-hover: #2563eb;
@@ -16,14 +17,18 @@
     }
 
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg-color); 
+      /*!! var = 변수값을 불러오는 코드 !! 위의 :root 에서 저장해놓은 컬러값을 가져옴 */
       background-image: url(/images/background1.jpg);
       background-attachment: fixed;
+      /* 백그라운드의 attachment 즉 이미지를 화면에 고정해놓는 코드. 스크롤을 통해 움직여도 사진이 고정됨.*/
       color: var(--text-color);
       display: flex;
       justify-content: center;
       padding: 40px 20px;
       min-height: 100vh;
+      /* vh는 반응형 웹구조를 위해 넣은 "사용자의 컴퓨터 모니터 크기에 맞게 값이 변하는 단위" */
+     /* vh = viewpoint height , vw = viewpoint width 말 그대로 스크린 높이/길이에 따라 달라짐 */
     }
 
     .container {
@@ -78,8 +83,15 @@
     /* Option Grid / Flex Styles */
     .options-grid {
       display: grid;
+      /* grid = 말 그대로 표시되는 형식을 그리드로 바꿈. 
+      즉 행과 열이 생기며 예시로는 흔히 웹사이트에서 많이 보이는 카드 형식의 팝업이 
+      대표적 */
       grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      /* 그리드의 columns 즉 열의 형식을 지정함. 위의 코드에서는 
+      열은 auto-fill 자동으로 채워넣고,
+      행은 minmax(110px, 1fr) 크기는 최소 110px 최대 1fr 만큼만 설정 이라는 뜻 */
       gap: 10px;
+      /* 행과 열 사이의 거리를 설정하는 코드 */
     }
 
     .options-flex {
@@ -100,6 +112,12 @@
       transition: all 0.2s ease;
       text-align: center;
       flex: 1;
+      /* flex-grow, flex-shrink, flex-basis의 단축형으로, 부모 컨테이너 즉 .btn-option
+      클래스를 감싸고 있는 곳에 여백이 남겨져 있을 때 지정한 값만큼의 비율에 맞게 아이템이 여백을 가져가며 (flex-grow)
+			여백이 부족할 떄 지정한 값만큼의 비율에 맞게 아이템의 크기가 줄어들고 (flex-shrink)
+			아이템이 기본적으로 가지는 시작 크기를 지정한 값에 맞게 설정하는 코드 (flex-basis)
+			요약해서 설명하면 반응형 웹구조를 만들기위해 흔히 사용하는 아이템의 크기 및 지정된 영역을 조정해주는 코드.
+			위의 flex:1 의 경우 각각 flex-grow = 1 , flex-shrink = 1 , flex-basis = 0% 의 값을 가짐. */
     }
 
     .btn-option:hover {
@@ -121,6 +139,8 @@
 
     .fade-in {
       animation: fadeIn 0.4s ease-in-out forwards;
+      /* fadiIn = 흐려진 상태에서 선명해지는 속성, 0.4s 에니메이션 시간 , ease-in-out 에니메이션의 동작 방식 그래프? 같은 느낌
+      해당 그래프는 처음엔 느렸다가 중간까지 빨라지고 끝에서는 다시 느려지는 S 모양의 그래프임, forwards는 그래프의 끝났을 때의 상태를 유지하는 속성값.*/
     }
 
     @keyframes fadeIn {
@@ -132,6 +152,7 @@
         opacity: 1;
         transform: translateY(0);
       }
+      /* 위의 fade-in 클래스에 적용되는 애니메이션에 사용될 변하는 상태값들이 적혀있음. */
     }
 
     /* Result Box */
@@ -172,9 +193,11 @@
       color: var(--primary-color);
     }
 
+/*  */
+
 #test { 
   width: 50%; 
-  height: 80vh;
+  height: 40vh;
   max-width: 200px;  
   background: #3b82f6;
   border: solid rgba(222, 208, 208, 0.342); 
@@ -183,9 +206,6 @@
   padding: 32px; 
   position: fixed;
   right: 20px;
-  overflow: hidden;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 .contentTest{
   -ms-overflow-style: none;
@@ -199,83 +219,198 @@
   position: fixed;
 }
 
-.menuBar{
-  position: fixed;
-  left: 20px;
-  width: 100px;
-  background-color: #acacac;
-  border-radius: 20px;
+
+/* =========================
+   왼쪽 고정 메뉴
+========================= */
+
+.menuBar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 80px;
+    height: 100vh;
+
+    z-index: 1000;
+
+    padding-top: 20px;
+
+    box-sizing: border-box;
 }
 
-.menuList{
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-ul,li{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+
+/* =========================
+   메뉴 리스트
+========================= */
+
+.menuList {
+    position: relative;
+
+    margin: 0;
+    padding: 0 15px;
+
+    box-sizing: border-box;
 }
 
 .menuList > li {
+    position: relative;
+
+    width: 50px;
+
+    margin: 0;
+    padding: 0;
+
     list-style: none;
+
+    border-radius: 10px;
+
+    /*
+     * 기본적으로 배경 없음
+     */
+    background: transparent;
+
+    transition:
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-/* 메뉴 아이콘 */
+
+/* =========================
+   메뉴가 열렸을 때
+========================= */
+
+.menuList > li.open {
+    /*
+     * 아이콘 영역부터 흰색
+     */
+    background: white;
+
+    /*
+     * 서브메뉴까지 하나의 패널처럼 보이게
+     */
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   메뉴 아이콘
+========================= */
+
 .menu_Icon {
-    background: none;
+    display: flex;
+
+    width: 50px;
+    height: 50px;
+
+    margin: 0;
+    padding: 5px;
+
+    align-items: center;
+    justify-content: center;
+
     border: none;
-    padding: 0;
+
+    background: transparent;
+
     cursor: pointer;
 }
 
 .menu_Icon img {
-    width: 50px;
-    height: 50px;
     display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
 }
 
-/* 서브메뉴 기본 상태 */
+
+/* =========================
+   서브메뉴
+========================= */
+
 .submenu {
+    position: fixed;
+
+    top: 75px;
+    left: 80px;
+
+    margin: 0;
+    padding: 8px 0;
+
+    width: max-content;
+    border-radius: 0 8px 8px 8px;
+    max-width: calc(100vw - 20px);
+
+    box-sizing: border-box;
+
     list-style: none;
-    /* margin: 10px 0 0 0; */
-    padding: 0;
 
-    width: 180px;
-
+    /*
+     * 아이콘과 동일한 흰색
+     */
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 
-    /* 처음에는 닫힘 */
-    max-height: 0;
-    overflow: hidden;
+    border-radius: 0 8px 8px 8px;
 
-    /* 펼쳐지는 애니메이션 */
-    transition: max-height 0.4s ease;
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.12);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translateY(-10px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
 }
 
-/* 메뉴가 열린 상태 */
-.submenu.active {
-    max-height: 200px;
+
+/* 열린 상태 */
+.menuList > li.open .submenu {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform: translateY(0);
 }
 
-/* 메뉴 항목 */
+
+/* =========================
+   서브메뉴 링크
+========================= */
+
 .submenu li {
     list-style: none;
+
+    margin: 0;
+    padding: 0;
 }
 
 .submenu li a {
     display: block;
-    padding: 14px 20px;
+
+    padding: 12px 20px;
 
     color: #333;
+
     text-decoration: none;
 
-    transition: background 0.2s;
+    white-space: nowrap;
+
+    box-sizing: border-box;
 }
 
 .submenu li a:hover {
-    background: #f1f5f9;
+    background: #f2f2f2;
 }
