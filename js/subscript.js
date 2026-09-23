@@ -202,7 +202,7 @@ function adjustSubmenu() {
     const iconRect = menuIcon.getBoundingClientRect();
 
     /*
-     * 일단 메뉴를 화면 안쪽에 표시
+    메뉴를 화면 안쪽에 표시
      */
     submenu.style.left = "10px";
 
@@ -210,7 +210,7 @@ function adjustSubmenu() {
         `${iconRect.bottom + 10}px`;
 
     /*
-     * 실제 서브메뉴 크기 확인
+    실제 서브메뉴 크기 확인
      */
     const submenuRect =
         submenu.getBoundingClientRect();
@@ -220,13 +220,13 @@ function adjustSubmenu() {
     let left = iconRect.left;
 
     /*
-     * 기본적으로 아이콘의 왼쪽에 맞춤
+    기본적으로 아이콘의 왼쪽에 맞춤
      */
     left = iconRect.left;
 
 
     /*
-     * 왼쪽으로 나가는 경우
+    왼쪽으로 나가는 경우
      */
     if (left < margin) {
         left = margin;
@@ -234,7 +234,7 @@ function adjustSubmenu() {
 
 
     /*
-     * 오른쪽으로 나가는 경우
+    오른쪽으로 나가는 경우
      */
     if (
         left + submenuRect.width
@@ -248,18 +248,11 @@ function adjustSubmenu() {
     }
 
 
-    /*
-     * 그래도 왼쪽으로 나가는 경우
-     * 화면 자체가 매우 작은 상황
-     */
     if (left < margin) {
         left = margin;
     }
 
 
-    /*
-     * 최종 위치
-     */
     submenu.style.left = `${left}px`;
 }
 

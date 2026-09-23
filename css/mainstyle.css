@@ -539,12 +539,3 @@ body {
 .submenu li a:hover {
     background: #f2f2f2;
 }
-
-.map-region{
-    position: relative;
-    z-index: 5;
-}
-
-.map-region:hover{
-    z-index: 10;
-}
