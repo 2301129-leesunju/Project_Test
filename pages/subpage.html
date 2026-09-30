@@ -7,23 +7,36 @@
     <link rel="icon" href="/images/icon_favicon_512.png" type="image/png">
     <link rel="stylesheet" href="/css/substyle.css">
     <script src="/js/subscript.js" defer></script>
-  
 </head>
 <body class="hero">
-  <section class="menuBar">
-    <div class="menuList">
-      <li>
-        <button type="button" class="menu_Icon">
-          <img src="/images/menu_Icon.png" alt="메뉴">
-        </button>
-
-        <ul class="submenu">
-          <li><a href="/pages/mainpage.html">메인 홈페이지</a></li>
-          <li><a href="/pages/subpage.html">여행 코스 탐색</a></li>
-        </ul>
-      </li>
+<section class="menuBar">
+  <nav class="menuBar-nav">
+    <!-- 왼쪽 홈페이지 아이콘 -->
+    <div class="menuBar-home">
+      <a href="/pages/mainpage.html" aria-label="홈으로">
+        <img
+          class="menuBar-homeIcon"
+          src="/images/icon_favicon_512.png"
+          alt="홈페이지 아이콘">
+      </a>
     </div>
-  </section>
+    <!-- 중앙 메뉴 -->
+    <ul class="menuBar-page">
+      <li>
+        <a href="/pages/subpage.html">여행 코스 탐색</a>
+      </li>
+      <li>
+        <a href="/pages/subpage.html">준비중</a>
+      </li>
+      <li>
+        <a href="/pages/subpage.html">준비중</a>
+      </li>
+      <li>
+        <a href="/pages/subpage.html">준비중</a>
+      </li>
+    </ul>
+  </nav>
+</section>
 
   <div class="container">
     <h1>🧭 맞춤 여행 코스 추천</h1>
@@ -40,7 +53,7 @@
         <button class="btn-option" data-value="충청도">충청도</button>
         <button class="btn-option" data-value="전라도">전라도</button>
         <button class="btn-option" data-value="경상도">경상도</button>
-        <button class="btn-option" data-value="제주특별자치도">제주도</button>
+        <button class="btn-option" data-value="제주도">제주도</button>
       </div>
     </div>
 
@@ -77,12 +90,20 @@
       </ul>
     </div>
   </div>
+<section class="container" id="today">
 
-  <section class="container" id="test">
-    <div class="block">
-      <h1 class="text">오늘의 추천</h1>
-    </div>
-    <div class="contentTest">
+  <div class="block">
+    <h1 class="todaytext">오늘의 추천</h1>
+  </div>
+
+  <div class="contentToday">
+    <li class="contentist">
+      <p>간단한</p>
+      <p>설명</p>
+      <p>및</p>
+      <p>내용</p>
+      <p>추가</p>
+      <p>예정</p>
       <p>.</p>
       <p>.</p>
       <p>.</p>
@@ -90,8 +111,10 @@
       <p>.</p>
       <p>.</p>
       <p>.</p>
-    </div>
-  </section>
+    </li>
+  </div>
+
+</section>
   
 </body>
 </html>

@@ -195,222 +195,257 @@
 
 /*  */
 
-#test { 
-  width: 50%; 
+
+
+#today {
+  width: 50%;
   height: 40vh;
-  max-width: 200px;  
+  max-width: 200px;
+
   background: #3b82f6;
-  border: solid rgba(222, 208, 208, 0.342); 
-  border-radius: 16px; 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55); 
-  padding: 32px; 
+
+  border: solid 1px rgba(222, 208, 208, 0.342);
+  border-radius: 16px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+
+  padding: 32px;
+
   position: fixed;
   right: 20px;
+
+  /* 메뉴바와 겹치지 않도록 */
+  top: 90px;
+
+  /* padding까지 포함해서 크기 계산 */
+  box-sizing: border-box;
+
+  /* 내부 요소가 밖으로 나가지 않게 */
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
-.contentTest{
+
+
+/* =========================
+   제목 영역
+========================= */
+
+.block {
+  flex-shrink: 0;
+
+  width: 100%;
+
+  padding-bottom: 16px;
+}
+
+
+/* 오늘의 추천 */
+.todaytext {
+  margin: 0;
+
+  color: #ffffffdd;
+
+  text-shadow: 0 0 10px #1e293b;
+
+  font-size: 24px;
+
+  /* 제목은 고정 */
+  position: static;
+}
+
+
+/* =========================
+   내용 영역
+========================= */
+
+.contentToday {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  /*
+   * 스크롤바 숨기기
+   */
   -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.contentTest::-webkit-scrollbar{
+
+
+.contentToday::-webkit-scrollbar {
   display: none;
 }
-.text{
-  color: #ffffffdd;
-  text-shadow: 0 0 10px #1e293b ;
-  position: fixed;
+
+
+/* 내용 */
+.contentToday p {
+  margin: 0 0 12px 0;
+
+  color: white;
+
+  line-height: 1.6;
+}
+
+.contentList{
+  margin: 10px;
 }
 
 
-/* =========================
-   왼쪽 고정 메뉴
-========================= */
 
+
+
+
+
+body {
+  margin: 0;
+  padding-top: 90px;
+}
+
+/* 전체 상단 메뉴 영역 */
 .menuBar {
-    position: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
 
-    top: 0;
-    left: 0;
+  width: 100%;
+  height: 80px;
 
-    width: 80px;
-    height: 100vh;
-
-    z-index: 1000;
-
-    padding-top: 20px;
-
-    box-sizing: border-box;
+  z-index: 1000;
 }
 
 
-/* =========================
-   메뉴 리스트
-========================= */
+/* 화면 전체를 채우는 Nav */
+.menuBar-nav {
+  position: relative;
 
-.menuList {
-    position: relative;
+  width: 100%;
+  height: 70px;
 
-    margin: 0;
-    padding: 0 15px;
+  margin: 0;
+  padding: 0 20px;
 
-    box-sizing: border-box;
-}
+  display: flex;
+  align-items: center;
 
-.menuList > li {
-    position: relative;
+  background: rgba(255, 255, 255, 0.95);
 
-    width: 50px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
 
-    margin: 0;
-    padding: 0;
+  backdrop-filter: blur(10px);
 
-    list-style: none;
-
-    border-radius: 10px;
-
-    /*
-     * 기본적으로 배경 없음
-     */
-    background: transparent;
-
-    transition:
-        background-color 0.25s ease,
-        box-shadow 0.25s ease;
+  box-sizing: border-box;
 }
 
 
-/* =========================
-   메뉴가 열렸을 때
-========================= */
+/* 왼쪽 홈페이지 */
+.menuBar-home {
+  width: 60px;
+  height: 70px;
 
-.menuList > li.open {
-    /*
-     * 아이콘 영역부터 흰색
-     */
-    background: white;
+  flex-shrink: 0;
 
-    /*
-     * 서브메뉴까지 하나의 패널처럼 보이게
-     */
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
-/* =========================
-   메뉴 아이콘
-========================= */
+.menuBar-home a {
+  width: 46px;
+  height: 46px;
 
-.menu_Icon {
-    display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    width: 50px;
-    height: 50px;
+  border-radius: 12px;
 
-    margin: 0;
-    padding: 5px;
-
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-
-    background: transparent;
-
-    cursor: pointer;
-}
-
-.menu_Icon img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
+  transition: background-color 0.25s ease,
+              transform 0.25s ease;
 }
 
 
-/* =========================
-   서브메뉴
-========================= */
-
-.submenu {
-    position: fixed;
-
-    top: 75px;
-    left: 80px;
-
-    margin: 0;
-    padding: 8px 0;
-
-    width: max-content;
-    border-radius: 0 8px 8px 8px;
-    max-width: calc(100vw - 20px);
-
-    box-sizing: border-box;
-
-    list-style: none;
-
-    /*
-     * 아이콘과 동일한 흰색
-     */
-    background: white;
-
-    border-radius: 0 8px 8px 8px;
-
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.12);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transform: translateY(-10px);
-
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
-        visibility 0.25s ease;
+.menuBar-home a:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.05);
 }
 
 
-/* 열린 상태 */
-.menuList > li.open .submenu {
-    opacity: 1;
+.menuBar-homeIcon {
+  width: 38px;
+  height: 38px;
 
-    visibility: visible;
+  object-fit: contain;
 
-    pointer-events: auto;
-
-    transform: translateY(0);
+  display: block;
 }
 
 
-/* =========================
-   서브메뉴 링크
-========================= */
+/* 중앙 메뉴 */
+.menuBar-page {
+  position: absolute;
 
-.submenu li {
-    list-style: none;
+  top: 0;
+  left: 50%;
 
-    margin: 0;
-    padding: 0;
+  height: 70px;
+
+  transform: translateX(-50%);
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  list-style: none;
 }
 
-.submenu li a {
-    display: block;
 
-    padding: 12px 20px;
+.menuBar-page li {
+  height: 44px;
 
-    color: #333;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-
-    box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 
-.submenu li a:hover {
-    background: #f2f2f2;
+
+.menuBar-page a {
+  height: 44px;
+
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #333;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  border-radius: 10px;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+.menuBar-page a:hover {
+  background-color: #f1f1f1;
+  color: #111;
 }
