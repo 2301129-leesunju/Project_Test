@@ -1,0 +1,24 @@
+/* 메인/서브 공통 여행지 안내 */
+.place-info-fields { margin: 0; padding: 0; }
+.place-info-field { padding: 15px 0; border-bottom: 1px solid #e2e8f0; }
+.place-info-field:first-child { padding-top: 0; }
+.place-info-field:last-child { border-bottom: 0; padding-bottom: 0; }
+.place-info-field dt { margin: 0 0 7px; color: #2563eb; font-size: 13px; font-weight: 700; line-height: 1.5; }
+.place-info-field dd { margin: 0; color: #334155; font-size: 15px; line-height: 1.85; white-space: pre-line; overflow-wrap: anywhere; word-break: keep-all; }
+#detailPlaceDescription { margin-top: 22px; }
+.place-text p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.place-description .place-info-fields { padding: 16px 8px; }
+.place-description .place-info-photo { display: block; width: 100%; max-width: 600px; height: auto; max-height: 320px; object-fit: cover; border-radius: 12px; margin: 0 auto 20px; }
+@media (max-width: 600px) {
+  .place-info-field dd { font-size: 14px; }
+  .place-description .place-info-fields { padding: 8px 0; }
+}
+/* 서브페이지: 상세보기를 열지 않아도 위치를 확인할 수 있는 주소 */
+.course-list .place-address {
+  margin: 5px 0 7px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}

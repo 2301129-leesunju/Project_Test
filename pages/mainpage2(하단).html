@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>여행 추천</title>
+
+    <!-- Swiper CSS -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    >
+
+    <!-- FontAwesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+    <!-- 메인 CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/mainstyle3.css"
+    >
+    <link rel="stylesheet" href="../css/place-description.css">
+    <script src="../js/place-description.js"></script>
+</head>
+
+<body>
+
+    <!-- ==================================================
+         상단 메뉴바
+    ================================================== -->
+    <header class="menuBar">
+        <nav class="menuBar-nav">
+
+            <!-- 왼쪽 홈 아이콘 -->
+            <div class="menuBar-home">
+                <a
+                    href="mainpage2.html"
+                    aria-label="홈으로"
+                >
+                    <img
+                        class="menuBar-homeIcon"
+                        src="../images/icon_favicon_512.png"
+                        alt="홈페이지 아이콘"
+                    >
+                </a>
+            </div>
+
+            <!-- 가운데 메뉴 -->
+            <ul class="menuBar-page">
+                <li>
+                    <a href="subpage.html">
+                        여행 코스 탐색
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        준비중
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        준비중
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        준비중
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- ==================================================
+         메인 전체
+    ================================================== -->
+    <main class="main-container">
+
+
+        <!-- ==================================================
+             추천 여행지
+        ================================================== -->
+        <section class="recommend-section">
+
+            <!-- 제목 -->
+            <div class="section-heading">
+                <p class="section-small-title">
+                    오늘의 여행
+                </p>
+
+                <h1>
+                    추천 여행지
+                </h1>
+            </div>
+
+
+            <!-- ==================================================
+                 추천 여행지 슬라이더
+            ================================================== -->
+            <div class="slider-outer">
+
+                <div class="swiper main-slider">
+
+                    <div class="swiper-wrapper">
+
+                        <!-- 카드 1 -->
+                        <div class="swiper-slide">
+
+                            <img
+                                class="slide-bg"
+                                src="../images/광명동굴.png"
+                                alt="추천 여행지 1"
+                            >
+
+                            <div class="slide-overlay"></div>
+
+                            <div class="slide-content">
+                                <h2>
+                                    광명동굴
+                                </h2>
+
+                                <p>
+                                    광명동굴은 산업유산으로서의 가치와 문화적 가치가 결합된 대한민국 최고의 
+                                    동굴테마파크라는 평가를 받고 있으며
+                                    폐광의 기적을 이루었습니다
+                                </p>
+
+                                <a
+                                    href="https://www.gm.go.kr/cv/index.do"
+                                    class="btn-detail"
+                                >
+                                    자세히 보기 →
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <!-- 카드 2 -->
+                        <div class="swiper-slide">
+
+                            <img
+                                class="slide-bg"
+                                src="../images/하회마을.jpg"
+                                alt="추천 여행지 2"
+                            >
+
+                            <div class="slide-overlay"></div>
+
+                            <div class="slide-content">
+                                <h2>
+                                    하회마을
+                                </h2>
+
+                                <p>
+                                    하회마을은 전통적인 한옥과 자연환경이 조화를 이루고 있는 곳으로, 한국의 전통 문화를 체험할 수 있는 인기 있는 여행지입니다.
+                                </p>
+
+                                <a
+                                    href="http://www.hahoe.or.kr/coding/main.asp"
+                                    class="btn-detail"
+                                >
+                                    자세히 보기 →
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <!-- 카드 3 -->
+                        <div class="swiper-slide">
+
+                            <img
+                                class="slide-bg"
+                                src="../images/선샤인스튜디오.png"
+                                alt="추천 여행지 3"
+                            >
+
+                            <div class="slide-overlay"></div>
+
+                            <div class="slide-content">
+                                <h2>
+                                    선샤인스튜디오
+                                </h2>
+
+                                <p>
+                                    선샤인스튜디오는 한국의 전통 문화와 현대 예술이 만나는 독특한 공간으로, 다양한 전시와 체험 프로그램을 제공합ㅌ니다.
+                                </p>
+
+                                <a
+                                    href="https://sunshinestudio.co.kr/"
+                                    class="btn-detail"
+                                >
+                                    자세히 보기 →
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <!-- 카드 4 -->
+                        <div class="swiper-slide">
+
+                            <img
+                                class="slide-bg"
+                                src="../images/하슬라 아트월드.png"
+                                alt="추천 여행지 4"
+                            >
+
+                            <div class="slide-overlay"></div>
+
+                            <div class="slide-content">
+                                <h2>
+                                    하슬라 아트월드
+                                </h2>
+
+                                <p>
+                                    하슬라 아트월드는 한국의 전통 문화와 현대 예술이 만나는 독특한 공간으로, 다양한 전시와 체험 프로그램을 제공합ㅌ니다.
+                                </p>
+
+                                <a
+                                    href="https://www.museumhaslla.com/home"
+                                    class="btn-detail"
+                                >
+                                    자세히 보기 →
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <!-- 카드 5 -->
+                        <div class="swiper-slide">
+
+                            <img
+                                class="slide-bg"
+                                src="../images/아쿠아플라넷.png"
+                                alt="추천 여행지 5"
+                            >
+
+                            <div class="slide-overlay"></div>
+
+                            <div class="slide-content">
+                                <h2>
+                                    아쿠아플라넷
+                                </h2>
+
+                                <p>
+                                    아쿠아플라넷은 수영장과 놀이시설이 어우러진 즐거운 공간으로, 가족 단위의 여행객들에게 인기 있는 목적지입니다.
+                                </p>
+
+                                <a
+                                    href="https://www.aquaplanet.co.kr/yeosu/index.do"
+                                    class="btn-detail"
+                                >
+                                    자세히 보기 →
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <!-- 카드 6 -->
+                        <div class="swiper-slide">
+
+                            <img
+                                class="slide-bg"
+                                src="../images/한라산.png"
+                                alt="추천 여행지 6"
+                            >
+
+                            <div class="slide-overlay"></div>
+
+                            <div class="slide-content">
+                                <h2>
+                                    한라산
+                                </h2>
+
+                                <p>
+                                    한라산은 한국의 자연 경관을 자랑하는 대표적인 산으로, 다양한 등반로와 체험 프로그램을 제공합니다.
+                                </p>
+
+                                <a
+                                    href="https://www.jeju.go.kr/hallasan/index.htm"
+                                    class="btn-detail"
+                                >
+                                    자세히 보기 →
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- 이전 -->
+                    <div
+                        class="swiper-button-prev slide-nav-btn"
+                    ></div>
+
+                    <!-- 다음 -->
+                    <div
+                        class="swiper-button-next slide-nav-btn"
+                    ></div>
+
+
+                    <!-- 페이지 번호 / 자동재생 -->
+                    <div class="slider-controls">
+
+                        <span class="fraction-pagination">
+                            <span class="current-slide">
+                                1
+                            </span>
+
+                            /
+
+                            <span class="total-slides">
+                                
+                            </span>
+                        </span>
+
+                        <button
+                            type="button"
+                            class="btn-toggle-autoplay"
+                            aria-label="일시정지"
+                        >
+                            <i class="fa-solid fa-pause"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+            <!-- ==================================================
+                아래쪽 전체
+                
+                왼쪽 = 계절별 추천
+                오른쪽 = 추후 기능
+                ================================================== -->
+            <section class="bottom-section">
+                <!-- ==================================================
+                    왼쪽 계절 추천 영역
+                    ================================================== -->
+                <section class="season-section">
+                    <!-- 제목 -->
+                    <div class="season-heading">
+                        <p class="section-small-title"> 계절별 추천 </p>
+                        <h2> 언제 떠나시나요? </h2>
+                        <p class="season-help"> 여행할 시기를 선택하면 추천 여행지를 보여드립니다. </p>
+                    </div>
+                    <!-- 계절 버튼 -->
+                    <div class="season-buttons">
+                        <button type="button" class="season-button active" data-season="봄">
+                            <span>🌸</span>
+                            <strong>3 ~ 5월</strong>
+                        </button>
+                        <button type="button" class="season-button" data-season="여름">
+                            <span>🌊</span>
+                            <strong>6 ~ 8월</strong>
+                        </button>
+                        <button type="button" class="season-button" data-season="가을">
+                            <span>🍂</span>
+                            <strong>9 ~ 11월</strong>
+                        </button>
+                        <button type="button" class="season-button" data-season="겨울">
+                            <span>❄️</span>
+                            <strong>12 ~ 2월</strong>
+                        </button>
+                    </div>
+                    <!-- JSON 여행 추천 정보 -->
+                    <div class="course-info">
+                        <div class="course-top">
+                            <!-- 선택 계절 -->
+                            <span class="selected-season-badge" id="selectedSeasonBadge"> 🌸 3 ~ 5월 </span>
+                            <!-- 지역 / 동행자 -->
+                            <div class="course-meta">
+                                <span id="courseRegion"> 지역 </span>
+                                <span>·</span>
+                                <span id="courseCompanion"> 동행자 </span>
+                            </div>
+                        </div>
+                        <!-- 코스 제목 -->
+                        <h2 class="course-title" id="courseTitle"> 추천 여행 코스를 불러오는 중입니다. </h2>
+                        <!-- JSON 여행지 3개 -->
+                        <div class="place-list" id="placeList"></div>
+                    </div>
+                </section>
+                <!-- ==================================================
+                    오른쪽 영역
+                    ================================================== -->
+                <aside class="future-section" id="courseDetailPanel" aria-labelledby="detailPanelHeading">
+                    <!-- 추후 기능 추가 -->
+                    <!-- ==================================================
+                        선택한 여행지 상세정보 (추가)
+                        기존 계절별 추천 영역과 같은 JSON 데이터를 사용
+                        새로운 HTML 페이지나 지도 API가 필요하지 않음
+                        ================================================== -->
+                    <div class="detail-panel">
+                        <div class="detail-panel-heading">
+                            <p class="section-small-title">코스 상세 안내</p>
+                            <h2 id="detailPanelHeading">여행지 상세정보</h2>
+                            <p class="detail-panel-help">왼쪽 여행지를 클릭하면 이곳에 설명이 표시됩니다.</p>
+                        </div>
+                        <!-- 현재 선택한 장소 순서 -->
+                        <span class="detail-position" id="detailPosition">1 / 3</span>
+                        <!-- JSON description 안에 이미지가 있을 때만 사진 표시 (0.5 추가) -->
+                        <div class="detail-place-media" id="detailPlaceMedia" hidden>
+                            <!-- 숨겨진 영역에서도 사진을 불러오도록 eager 사용: 로딩 완료 후 JS에서 표시 -->
+                            <img id="detailPlaceImage" alt="" loading="eager" />
+                        </div>
+                        <!-- JSON의 places[].name / places[].description 사용 -->
+                        <div class="detail-place-info" aria-live="polite">
+                            <h3 id="detailPlaceName">여행지를 선택해 주세요.</h3>
+                            <div id="detailPlaceDescription">선택한 여행지의 소개가 표시됩니다.</div>
+                        </div>
+                        <!-- JSON의 region / companion / season 사용 -->
+                        <dl class="detail-meta-list">
+                            <div class="detail-meta-item">
+                                <dt>지역</dt>
+                                <dd id="detailRegion">-</dd>
+                            </div>
+                            <div class="detail-meta-item">
+                                <dt>동행자</dt>
+                                <dd id="detailCompanion">-</dd>
+                            </div>
+                            <div class="detail-meta-item">
+                                <dt>추천 계절</dt>
+                                <dd id="detailSeason">-</dd>
+                            </div>
+                        </dl>
+                        <!-- 장소 이름으로 네이버 지도 검색 (API 키 불필요) -->
+                        <a
+                            id="detailMapLink"
+                            class="detail-map-button"
+                            href="https://map.naver.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            네이버 지도에서 보기 ↗
+                        </a>
+                        <p class="detail-map-note">
+                            지도에서는 장소 이름으로 검색합니다. 실제 위치는 검색 결과를 확인해 주세요.
+                        </p>
+                    </div>
+                </aside>
+            </section>
+        </main>
+        <!-- Swiper -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- 메인 JS -->
+        <script src="../js/mainjs2하단.js"></script>
+    </body>
+</html>
+

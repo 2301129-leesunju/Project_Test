@@ -18,8 +18,7 @@
 
     body {
       background-color: var(--bg-color); 
-      /*!! var = 변수값을 불러오는 코드 !! 위의 :root 에서 저장해놓은 컬러값을 가져옴 */
-      background-image: url(/images/background1.jpg);
+      background-image: url(../images/background1.jpg);
       background-attachment: fixed;
       /* 백그라운드의 attachment 즉 이미지를 화면에 고정해놓는 코드. 스크롤을 통해 움직여도 사진이 고정됨.*/
       color: var(--text-color);
@@ -448,4 +447,14 @@ body {
 .menuBar-page a:hover {
   background-color: #f1f1f1;
   color: #111;
+}
+/* 상세보기 안에 표시되는 이미지 크기 조절 */
+.place-description img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px auto;
 }

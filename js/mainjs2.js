@@ -427,6 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p>
                             ${place.description}
                         </p>
+                        
 
                     </div>
                 `;

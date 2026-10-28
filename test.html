@@ -1,16 +1,41 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>가격 확인</title>
 </head>
 <body>
-    <input style="background-color: #3b82f6; font-size: 16px; text-align: center; display: block; border: 1px solid #3b82f6; box-shadow: 0 1px 3px 2px #1e3b8a64; border-radius: 8px; width: 80px; height: 40px; margin-left: auto; display: flex;" type="button" value="상세보기">
+    <input id="price" type="number" placeholder="가격(만원)">
+    <button id="checkBtn">확인</button>
+    
+    <p id="result">가격을 입력해 주세요.</p>
 
-    <h2>contentType 디렉티브 태그</h2>
-    <h4>text/html : HTML 출력</h4>
-    <h4>charset=utf-8 : 문자 인코딩</h4>
+    <script>
+        const priceInput = document.querySelector("#price");
+        const button = document.querySelector("#checkBtn");
+        const result = document.querySelector("#result");
+
+        button.addEventListener("click", function () {
+            // 가격 입력 여부 확인
+            if (priceInput.value.trim() === "") {
+                result.textContent = "가격을 입력하세요.";
+                return;
+            }
+
+            // 입력값을 숫자로 변환
+            const price = Number(priceInput.value);
+
+            // 음수 입력 방지
+            if (price < 0) {
+                result.textContent = "0 이상의 값을 입력하세요.";
+                return;
+            }
+
+            // 입력한 가격 출력
+            result.textContent = price + "만원을 입력했습니다.";
+        });
+    </script>
 </body>
 </html>
-

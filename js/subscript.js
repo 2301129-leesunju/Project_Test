@@ -44,7 +44,7 @@ fetch("/data/tourCourses.json")
 
     return response.json();
   })
-
+  
   .then(data => {
 
     // JSON 데이터를 tourCourses에 저장
