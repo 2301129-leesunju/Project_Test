@@ -60,7 +60,7 @@
 
                 <li>
                     <a href="#">
-                        준비중
+                        설명
                     </a>
                 </li>
 
@@ -71,7 +71,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="#">ㄴ
                         준비중
                     </a>
                 </li>
@@ -380,23 +380,36 @@
                             <strong>12 ~ 2월</strong>
                         </button>
                     </div>
+                    <div class="tour-explorer" aria-label="관광지 찾아보기">
+                        <div class="tour-filters">
+                            <label>지역<select id="tourRegion"><option value="">전체 지역</option></select></label>
+                            <label>동행자<select id="tourCompanion"><option value="">전체</option><option>혼자</option><option>커플</option><option>가족</option></select></label>
+                            <label class="tour-search">관광지 검색<input id="tourSearch" type="search" placeholder="관광지 이름 또는 주소" /></label>
+                        </div>
+                        <p id="tourResultCount" role="status">관광지를 불러오는 중입니다.</p>
+                        <div id="tourCardGrid" class="tour-card-grid"></div>
+                        <div class="tour-pagination"><button id="tourPrev" type="button">← 이전</button><span id="tourPage">1 / 1</span><button id="tourNext" type="button">다음 →</button></div>
+                        <p class="tour-classification-note">동행자와 계절은 테스트용 분류입니다. 관광지 카드를 선택하면 상세정보가 바뀝니다.</p>
+                    </div>
                     <!-- JSON 여행 추천 정보 -->
+                    <!-- 코스 요약 영역: 요청에 따라 주석 처리
                     <div class="course-info">
                         <div class="course-top">
-                            <!-- 선택 계절 -->
+                            
                             <span class="selected-season-badge" id="selectedSeasonBadge"> 🌸 3 ~ 5월 </span>
-                            <!-- 지역 / 동행자 -->
+                            
                             <div class="course-meta">
                                 <span id="courseRegion"> 지역 </span>
                                 <span>·</span>
                                 <span id="courseCompanion"> 동행자 </span>
                             </div>
                         </div>
-                        <!-- 코스 제목 -->
+                        
                         <h2 class="course-title" id="courseTitle"> 추천 여행 코스를 불러오는 중입니다. </h2>
-                        <!-- JSON 여행지 3개 -->
+                        
                         <div class="place-list" id="placeList"></div>
                     </div>
+                    -->
                 </section>
                 <!-- ==================================================
                     오른쪽 영역

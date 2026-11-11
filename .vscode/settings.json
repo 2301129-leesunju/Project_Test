@@ -1,0 +1,13 @@
+{
+  "liveServer.settings.ignoreFiles": [
+    "**/.vscode/**",
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/data/tour-import-cache/**",
+    "**/data/tour-import-report.json",
+    "**/scripts/**"
+  ],
+  "files.watcherExclude": {
+    "**/data/tour-import-cache/**": true
+  }
+}

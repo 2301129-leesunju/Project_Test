@@ -126,35 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailPlaceMedia = document.getElementById("detailPlaceMedia");
     const detailPlaceImage = document.getElementById("detailPlaceImage");
 
-    // 설명에는 일반 글 또는 <span><img src='../images/...'></span> 형식을 허용
-    // 외부 HTML 코드는 삽입하지 않고, 글과 프로젝트 이미지 주소만 따로 추출
+    // 목록과 상세 패널이 같은 이미지 허용 규칙을 사용한다.
     function parsePlaceDescription(description) {
-        const doc = new DOMParser().parseFromString(String(description ?? ""), "text/html");
-        const text = doc.body.textContent.replace(/\s+/g, " ").trim();
-        const imageElement = doc.body.querySelector("img[src]");
-        let imageSrc = null;
-
-        if (imageElement) {
-            const rawSrc = imageElement.getAttribute("src");
-
-            try {
-                const imagesRoot = new URL("../images/", document.baseURI);
-                const imageUrl = new URL(rawSrc, document.baseURI);
-
-                // 프로젝트의 images 폴더에 있는 이미지 파일만 표시
-                if (
-                    imageUrl.origin === imagesRoot.origin &&
-                    imageUrl.pathname.startsWith(imagesRoot.pathname) &&
-                    /\.(png|jpe?g|webp|gif|avif)$/i.test(imageUrl.pathname)
-                ) {
-                    imageSrc = imageUrl.href;
-                }
-            } catch (error) {
-                console.warn("이미지 경로를 확인하세요:", rawSrc, error);
-            }
-        }
-
-        return { text, imageSrc };
+        return PlaceDescription.parse(description);
     }
 
     // 선택한 여행지에 실제 등록된 사진이 있을 때만 표시
@@ -209,6 +183,74 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==================================================
 
     let tourCourses = [];
+    let explorerSeason = "봄";
+    let explorerPage = 0;
+    const tourRegion = document.getElementById("tourRegion");
+    const tourCompanion = document.getElementById("tourCompanion");
+    const tourSearch = document.getElementById("tourSearch");
+    const tourGrid = document.getElementById("tourCardGrid");
+    const tourPrev = document.getElementById("tourPrev");
+    const tourNext = document.getElementById("tourNext");
+    const pageSize = 6;
+
+    function matchingTours() {
+        const query = tourSearch.value.trim().toLocaleLowerCase();
+        return tourCourses.filter(course => course.season === explorerSeason &&
+            (!tourRegion.value || course.region === tourRegion.value) &&
+            (!tourCompanion.value || course.companion === tourCompanion.value) &&
+            (!query || [course.title, ...course.places.map(p => p.name + " " + p.description)].join(" ").toLocaleLowerCase().includes(query)));
+    }
+
+    function renderTourCards() {
+        const matches = matchingTours();
+        const pages = Math.max(1, Math.ceil(matches.length / pageSize));
+        explorerPage = Math.min(explorerPage, pages - 1);
+        document.getElementById("tourResultCount").textContent = `${explorerSeason} · ${matches.length.toLocaleString()}개 코스 / 전체 ${tourCourses.length.toLocaleString()}개`;
+        document.getElementById("tourPage").textContent = `${explorerPage + 1} / ${pages}`;
+        tourPrev.disabled = explorerPage === 0;
+        tourNext.disabled = explorerPage >= pages - 1;
+        tourGrid.replaceChildren();
+        for (const course of matches.slice(explorerPage * pageSize, (explorerPage + 1) * pageSize)) {
+            const card = document.createElement("button");
+            card.type = "button";
+            card.className = "tour-card";
+            card.setAttribute("aria-pressed", String(course === selectedCourse));
+            const cover = document.createElement("div");
+            cover.className = "tour-card-cover";
+            cover.textContent = "🧭";
+            const src = PlaceDescription.parse(course.places[0]?.description).imageSrc;
+            if (src) {
+                const img = document.createElement("img");
+                img.alt = course.places[0].name;
+                img.loading = "lazy";
+                img.src = src;
+                img.onerror = () => img.remove();
+                cover.append(img);
+            }
+            const title = document.createElement("strong");
+            title.textContent = course.places.map(p => p.name).join(" · ");
+            const meta = document.createElement("span");
+            meta.textContent = `${course.region} · ${course.companion} · ${course.places.length}곳`;
+            card.append(cover, title, meta);
+            card.addEventListener("click", () => {
+                showSeasonCourse(explorerSeason, course);
+                tourGrid.querySelectorAll(".tour-card").forEach(c => c.setAttribute("aria-pressed", String(c === card)));
+            });
+            tourGrid.append(card);
+        }
+        if (!matches.length) tourGrid.textContent = "조건에 맞는 관광지가 없습니다. 지역이나 검색어를 바꿔주세요.";
+    }
+
+    function refreshExplorer() {
+        explorerPage = 0;
+        showSeasonCourse(explorerSeason, matchingTours()[0]);
+        renderTourCards();
+    }
+    tourRegion.addEventListener("change", refreshExplorer);
+    tourCompanion.addEventListener("change", refreshExplorer);
+    tourSearch.addEventListener("input", refreshExplorer);
+    tourPrev.addEventListener("click", () => { explorerPage--; renderTourCards(); });
+    tourNext.addEventListener("click", () => { explorerPage++; renderTourCards(); });
 
     // ==================================================
     // JSON 불러오기
@@ -223,14 +265,20 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             tourCourses = await response.json();
+            [...new Set(tourCourses.map(course => course.region))].sort().forEach(region => {
+                tourRegion.add(new Option(region, region));
+            });
 
             // JSON을 슬라이더에도 연결 (기존 6장의 HTML 구조는 보존)
             // setupSliderCourseLinks();
 
             // 처음에는 봄
             showSeasonCourse("봄");
+            renderTourCards();
         } catch (error) {
             console.error(error);
+            document.getElementById("tourResultCount").textContent = "여행 정보를 불러오지 못했습니다. Live Server 연결을 확인해주세요.";
+            if (placeList) {
             courseRegion.textContent = "-";
             courseCompanion.textContent = "-";
             courseTitle.textContent = "여행 정보를 불러오지 못했습니다.";
@@ -255,6 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
+            }
             // 오른쪽 패널도 오류 상태 안내
             showDetailEmpty("여행 코스 데이터를 불러오지 못했습니다.");
         }
@@ -270,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const course =
             preferredCourse && preferredCourse.season === season
                 ? preferredCourse
-                : tourCourses.find(item => item.season === season);
+                : matchingTours()[0];
 
         const info = seasonInfo[season];
 
@@ -286,7 +335,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // 계절 뱃지
         // ==================================================
 
-        seasonBadge.textContent = `${info.icon} ${info.month}`;
+        if (seasonBadge) seasonBadge.textContent = `${info.icon} ${info.month}`;
+
+        // 코스 요약 HTML을 주석 처리해도 검색 카드와 상세 패널은 동작한다.
+        if (!placeList) {
+            if (course) showPlaceDetail(course, 0);
+            else showDetailEmpty("조건에 맞는 관광지가 없습니다.");
+            return;
+        }
 
         // ==================================================
         // 해당 계절 데이터 없음
@@ -412,7 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
         detailMapLink.removeAttribute("aria-disabled");
 
         // 왼쪽 선택한 여행지 강조
-        placeList.querySelectorAll('.place-item[role="button"]').forEach((item, itemIndex) => {
+        placeList?.querySelectorAll('.place-item[role="button"]').forEach((item, itemIndex) => {
             const isSelected = itemIndex === index;
             item.classList.toggle("selected", isSelected);
             item.setAttribute("aria-pressed", String(isSelected));
@@ -494,7 +550,10 @@ document.addEventListener("DOMContentLoaded", () => {
     seasonButtons.forEach(button => {
         button.addEventListener("click", () => {
             const season = button.dataset.season;
+            explorerSeason = season;
+            explorerPage = 0;
             showSeasonCourse(season);
+            renderTourCards();
         });
     });
 

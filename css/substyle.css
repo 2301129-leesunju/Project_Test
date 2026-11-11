@@ -1,460 +1,829 @@
-    /* var 값 설정 - 대충 color 값 미리 설정해놓는것 */
-   :root {
-      --primary-color: #3b82f6;
-      --primary-hover: #2563eb;
-      --bg-color: #f8fafc;
-      --card-bg: #ffffff;
-      --text-color: #1e293b;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-color); 
-      background-image: url(../images/background1.jpg);
-      background-attachment: fixed;
-      /* 백그라운드의 attachment 즉 이미지를 화면에 고정해놓는 코드. 스크롤을 통해 움직여도 사진이 고정됨.*/
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-      min-height: 100vh;
-      /* vh는 반응형 웹구조를 위해 넣은 "사용자의 컴퓨터 모니터 크기에 맞게 값이 변하는 단위" */
-     /* vh = viewpoint height , vw = viewpoint width 말 그대로 스크린 높이/길이에 따라 달라짐 */
-    }
-
-    .container {
-      width: 100%;
-      max-width: 800px;
-      background: var(--card-bg);
-      border: solid rgba(222, 208, 208, 0.342);
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
-      padding: 32px;
-    }
-
-    h1 {
-      font-size: 24px;
-      text-align: center;
-      margin-bottom: 8px;
-      color: #0f172a;
-    }
-
-    p.subtitle {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 32px;
-    }
-
-    .section {
-      margin-bottom: 28px;
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-title span.badge {
-      background: var(--primary-color);
-      color: white;
-      font-size: 12px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Option Grid / Flex Styles */
-    .options-grid {
-      display: grid;
-      /* grid = 말 그대로 표시되는 형식을 그리드로 바꿈. 
-      즉 행과 열이 생기며 예시로는 흔히 웹사이트에서 많이 보이는 카드 형식의 팝업이 
-      대표적 */
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      /* 그리드의 columns 즉 열의 형식을 지정함. 위의 코드에서는 
-      열은 auto-fill 자동으로 채워넣고,
-      행은 minmax(110px, 1fr) 크기는 최소 110px 최대 1fr 만큼만 설정 이라는 뜻 */
-      gap: 10px;
-      /* 행과 열 사이의 거리를 설정하는 코드 */
-    }
-
-    .options-flex {
-      display: flex;
-      gap: 12px;
-    }
-
-    .btn-option {
-      background: #f1f5f9;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      box-shadow: 0 3px 3px #b1b1b1;
-      padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-color);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: center;
-      flex: 1;
-      /* flex-grow, flex-shrink, flex-basis의 단축형으로, 부모 컨테이너 즉 .btn-option
-      클래스를 감싸고 있는 곳에 여백이 남겨져 있을 때 지정한 값만큼의 비율에 맞게 아이템이 여백을 가져가며 (flex-grow)
-			여백이 부족할 떄 지정한 값만큼의 비율에 맞게 아이템의 크기가 줄어들고 (flex-shrink)
-			아이템이 기본적으로 가지는 시작 크기를 지정한 값에 맞게 설정하는 코드 (flex-basis)
-			요약해서 설명하면 반응형 웹구조를 만들기위해 흔히 사용하는 아이템의 크기 및 지정된 영역을 조정해주는 코드.
-			위의 flex:1 의 경우 각각 flex-grow = 1 , flex-shrink = 1 , flex-basis = 0% 의 값을 가짐. */
-    }
-
-    .btn-option:hover {
-      background: #e2e8f0;
-    }
-
-    .btn-option.selected {
-      background: var(--primary-color);
-      color: white;
-      border-color: var(--primary-color);
-      font-weight: 600;
-      box-shadow: 0 1px 3px 2px #1e3b8a64;
-    }
-
-    /* Step Visibility Animation */
-    .hidden {
-      display: none;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.4s ease-in-out forwards;
-      /* fadiIn = 흐려진 상태에서 선명해지는 속성, 0.4s 에니메이션 시간 , ease-in-out 에니메이션의 동작 방식 그래프? 같은 느낌
-      해당 그래프는 처음엔 느렸다가 중간까지 빨라지고 끝에서는 다시 느려지는 S 모양의 그래프임, forwards는 그래프의 끝났을 때의 상태를 유지하는 속성값.*/
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      /* 위의 fade-in 클래스에 적용되는 애니메이션에 사용될 변하는 상태값들이 적혀있음. */
-    }
-
-    /* Result Box */
-    .result-box {
-      margin-top: 32px;
-      padding: 24px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 12px;
-    }
-
-    .result-box h3 {
-      font-size: 18px;
-      color: #1e3a8a;
-      margin-bottom: 12px;
-    }
-
-    .course-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .course-item {
-      background: white;
-      padding: 12px 16px;
-      border-radius: 8px;
-      border: 1px solid #dbeafe;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .course-item span {
-      font-weight: bold;
-      color: var(--primary-color);
-    }
-
-/*  */
-
-
-
-#today {
-  width: 50%;
-  height: 40vh;
-  max-width: 200px;
-
-  background: #3b82f6;
-
-  border: solid 1px rgba(222, 208, 208, 0.342);
-  border-radius: 16px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
-
-  padding: 32px;
-
-  position: fixed;
-  right: 20px;
-
-  /* 메뉴바와 겹치지 않도록 */
-  top: 90px;
-
-  /* padding까지 포함해서 크기 계산 */
-  box-sizing: border-box;
-
-  /* 내부 요소가 밖으로 나가지 않게 */
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
+:root {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-color: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
 
-/* =========================
-   제목 영역
-========================= */
+body {
+  background-color: var(--bg-color);
+  background-image: url("/images/background1.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 110px 20px 40px;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 80vw;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--card-bg);
+  border: 1px solid rgba(222, 208, 208, 0.342);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+}
+
+h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+p.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.section {
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title span.badge {
+  background: var(--primary-color);
+  color: white;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.options-flex {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-option {
+  width: 100%;
+  min-width: 0;
+  background: #f1f5f9;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 3px 3px #b1b1b1;
+  padding: 14px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-option:hover {
+  background: #e2e8f0;
+}
+
+.btn-option.selected {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  font-weight: 600;
+  box-shadow: 0 1px 3px 2px #1e3b8a64;
+}
+
+.hidden {
+  display: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-box {
+  width: 100%;
+  margin-top: 32px;
+  padding: 24px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+}
+
+.result-box h3 {
+  font-size: 18px;
+  color: #1e3a8a;
+  margin-bottom: 16px;
+}
+
+.course-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
+.course-card-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 60px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.course-card-title {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text-color);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.info_button {
+  width: 80px;
+  height: 36px;
+  flex-shrink: 0;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 1px 3px 2px #1e3b8a32;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.info_button:hover {
+  background-color: var(--primary-hover);
+}
+
+.place-list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.place-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 12px 0;
+  border-bottom: 1px dashed #e2e8f0;
+  font-size: 14px;
+}
+
+.place-item:last-child {
+  border-bottom: none;
+}
+
+.place-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-height: 28px;
+  line-height: 1.5;
+}
+
+.place-step {
+  flex-shrink: 0;
+  color: var(--primary-color);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.place-name {
+  min-width: 0;
+  color: var(--text-color);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.place-address {
+  display: -webkit-box;
+  min-height: 40px;
+  margin: 6px 0 0;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.place-description {
+  display: block;
+  margin-top: 8px;
+  padding: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.place-description.description-hidden {
+  display: none;
+}
+
+.place-description p {
+  margin-bottom: 6px;
+}
+
+.place-description p:last-child {
+  margin-bottom: 0;
+}
+
+.empty-result {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px 10px;
+  color: var(--text-muted);
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.empty-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.load-error {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: #ef4444;
+}
+
+#today {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 40vh;
+  padding: 24px;
+  overflow: hidden;
+  background: #3b82f6;
+  border: 1px solid rgba(222, 208, 208, 0.342);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+}
 
 .block {
   flex-shrink: 0;
-
   width: 100%;
-
   padding-bottom: 16px;
 }
 
-
-/* 오늘의 추천 */
 .todaytext {
   margin: 0;
-
   color: #ffffffdd;
-
   text-shadow: 0 0 10px #1e293b;
-
   font-size: 24px;
-
-  /* 제목은 고정 */
-  position: static;
 }
-
-
-/* =========================
-   내용 영역
-========================= */
 
 .contentToday {
   flex: 1;
-
   min-height: 0;
-
   width: 100%;
-
   overflow-y: auto;
   overflow-x: hidden;
-  
-  /*
-   * 스크롤바 숨기기
-   */
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 
 .contentToday::-webkit-scrollbar {
   display: none;
 }
 
-
-/* 내용 */
 .contentToday p {
-  margin: 0 0 12px 0;
-
+  margin: 0 0 12px;
   color: white;
-
   line-height: 1.6;
 }
 
-.contentList{
+.contentList {
   margin: 10px;
 }
 
-
-
-
-
-
-
-body {
-  margin: 0;
-  padding-top: 90px;
-}
-
-/* 전체 상단 메뉴 영역 */
 .menuBar {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 80px;
-
   z-index: 1000;
 }
 
-
-/* 화면 전체를 채우는 Nav */
 .menuBar-nav {
   position: relative;
-
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 70px;
-
   margin: 0;
   padding: 0 20px;
-
-  display: flex;
-  align-items: center;
-
   background: rgba(255, 255, 255, 0.95);
-
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
-
   backdrop-filter: blur(10px);
-
-  box-sizing: border-box;
 }
 
-
-/* 왼쪽 홈페이지 */
 .menuBar-home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 60px;
   height: 70px;
-
   flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-
 
 .menuBar-home a {
-  width: 46px;
-  height: 46px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  width: 46px;
+  height: 46px;
   border-radius: 12px;
-
-  transition: background-color 0.25s ease,
-              transform 0.25s ease;
+  transition: background-color 0.25s ease, transform 0.25s ease;
 }
-
 
 .menuBar-home a:hover {
   background-color: #f1f1f1;
   transform: scale(1.05);
 }
 
-
 .menuBar-homeIcon {
+  display: block;
   width: 38px;
   height: 38px;
-
   object-fit: contain;
-
-  display: block;
 }
 
-
-/* 중앙 메뉴 */
 .menuBar-page {
   position: absolute;
-
   top: 0;
   left: 50%;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   height: 70px;
-
-  transform: translateX(-50%);
-
   margin: 0;
   padding: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
   list-style: none;
+  transform: translateX(-50%);
 }
-
 
 .menuBar-page li {
-  height: 44px;
-
   display: flex;
   align-items: center;
+  height: 44px;
 }
 
-
 .menuBar-page a {
-  height: 44px;
-
-  padding: 0 22px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  height: 44px;
+  padding: 0 22px;
   color: #333;
-
   font-size: 15px;
   font-weight: 500;
-
   text-decoration: none;
-
   border-radius: 10px;
-
   white-space: nowrap;
-
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
-
 
 .menuBar-page a:hover {
   background-color: #f1f1f1;
   color: #111;
 }
-/* 상세보기 안에 표시되는 이미지 크기 조절 */
-.place-description img {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin: 10px auto;
+
+@media (max-width: 1100px) {
+  .container {
+    max-width: 90vw;
+  }
+
+  .course-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #today {
+    display: none;
+  }
 }
+
+@media (max-width: 700px) {
+  body {
+    padding: 95px 12px 24px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .options-grid,
+  .options-flex {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .course-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .result-box {
+    padding: 16px;
+  }
+
+  .menuBar-page {
+    gap: 2px;
+  }
+
+  .menuBar-page a {
+    padding: 0 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 16px;
+  }
+
+  .options-grid,
+  .options-flex,
+  .course-list {
+    grid-template-columns: 1fr;
+  }
+
+  .course-card {
+    padding: 14px;
+  }
+
+  .menuBar-nav {
+    padding: 0 8px;
+  }
+
+  .menuBar-home {
+    width: 45px;
+  }
+
+  .menuBar-page {
+    left: auto;
+    right: 8px;
+    transform: none;
+  }
+
+  .menuBar-page a {
+    padding: 0 7px;
+    font-size: 12px;
+  }
+}
+.container {
+  width: 100%;
+  max-width: calc(80vw - 100px);
+  min-width: 0;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--card-bg);
+  border: 1px solid rgba(222, 208, 208, 0.342);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+}
+@media (max-width: 1100px) {
+  .container {
+    max-width: calc(90vw - 100px);
+  }
+
+  .course-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #today {
+    display: none;
+  }
+}
+#season-group .options-flex {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+@media (max-width: 700px) {
+    #season-group .options-flex {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+#step-season #season-group {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+#step-season #season-group .btn-option {
+    width: 100%;
+    min-width: 0;
+}
+.place-description[hidden] {
+    display: none !important;
+}
+.course-list {
+    align-items: start;
+}
+
+.course-card {
+    align-self: start;
+    height: fit-content;
+}
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.course-card {
+    min-width: 0;
+    align-self: start;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.course-list.has-selection {
+    grid-template-columns: 1fr;
+}
+
+.course-list.has-selection .course-card:not(.selected-course) {
+    display: none;
+}
+
+.course-list.has-selection .selected-course {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+#course-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+#course-list .course-card {
+    min-width: 0;
+    width: 100%;
+    height: fit-content;
+    align-self: start;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+#course-list.has-selection {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+#course-list.has-selection .course-card:not(.selected-course) {
+    display: none;
+}
+
+#course-list.has-selection .selected-course {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+#course-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    width: 100%;
+}
+
+#course-list .course-card {
+    width: 100%;
+    min-width: 0;
+    height: fit-content;
+    align-self: start;
+}
+
+#course-list.has-selection {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+#course-list.has-selection .course-card:not(.selected-course) {
+    display: none;
+}
+
+#course-list.has-selection .selected-course {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+#course-list .place-description[hidden] {
+    display: none !important;
+}
+/* 에니메이션임 css 추가할 때 이 위로 추가할 것 */
+#result-box {
+    transform-origin: top center;
+    animation: resultDrop 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes resultDrop {
+    0% {
+        opacity: 0;
+        transform: scaleY(0.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+#course-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    width: 100%;
+}
+
+#course-list .course-card {
+    width: 100%;
+    min-width: 0;
+    height: fit-content;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#course-list.has-selection {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+#course-list .course-card.is-hiding {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+}
+
+#course-list.has-selection .course-card.selected-course {
+    grid-column: 1 / -1;
+    width: 100%;
+    animation: courseExpand 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+#course-list .selected-course.expand-left {
+    transform-origin: top left;
+}
+
+#course-list .selected-course.expand-center {
+    transform-origin: top center;
+}
+
+#course-list .selected-course.expand-right {
+    transform-origin: top right;
+}
+
+@keyframes courseExpand {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.25);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.03);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#course-list .selected-course.is-collapsing {
+    animation: courseCollapse 0.4s cubic-bezier(0.4, 0, 0.6, 1) both;
+}
+
+@keyframes courseCollapse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(0.25);
+    }
+}
+
+#course-list .place-description {
+    animation: descriptionAppear 0.4s ease both;
+}
+
+@keyframes descriptionAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#course-list .place-description[hidden] {
+    display: none !important;
+}
+
+.info_button {
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.info_button:hover {
+    transform: translateY(-2px);
+}
+
+.info_button:active {
+    transform: scale(0.96);
+}
+/* 애니메이션!!!!!!!!!! 이라 말하고 트랜스폼이라 씀 */

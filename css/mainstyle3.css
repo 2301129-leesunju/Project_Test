@@ -850,3 +850,25 @@ body {
     }
 
 }
+
+/* 관광지 검색 및 페이지별 미리보기 */
+.tour-explorer { margin: 24px 0; }
+.tour-filters { display: flex; flex-wrap: wrap; gap: 12px; }
+.tour-filters label { display: grid; gap: 7px; font-size: 13px; color: #475569; flex: 1; min-width: 100px; }
+.tour-filters .tour-search { flex: 2; min-width: 170px; }
+.tour-filters input, .tour-filters select { width: 100%; min-height: 42px; padding: 9px 10px; border: 1px solid #cbd5e1; border-radius: 9px; background: #fff; color: #1e293b; font: inherit; box-sizing: border-box; }
+#tourResultCount { margin: 16px 0 12px; color: #475569; font-size: 13px; }
+.tour-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.tour-card { min-width: 0; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 12px; padding: 0 0 12px; background: #fff; text-align: left; cursor: pointer; color: #1e293b; font: inherit; }
+.tour-card:hover, .tour-card[aria-pressed="true"] { border-color: #2563eb; box-shadow: 0 0 0 1px #2563eb; }
+.tour-card-cover { position: relative; display: grid; place-items: center; height: 110px; background: #e8f1f5; font-size: 30px; }
+.tour-card-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tour-card strong, .tour-card > span { display: block; margin: 10px 12px 0; overflow-wrap: anywhere; }
+.tour-card strong { font-size: 14px; }
+.tour-card > span { font-size: 12px; color: #64748b; }
+.tour-pagination { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; font-size: 13px; }
+.tour-pagination button { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; cursor: pointer; }
+.tour-pagination button:disabled { opacity: .4; cursor: default; }
+.tour-classification-note { margin-top: 14px; font-size: 12px; line-height: 1.7; color: #64748b; }
+.tour-card:focus-visible, .tour-pagination button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
+@media (max-width: 420px) { .tour-card-grid { grid-template-columns: 1fr; } }
